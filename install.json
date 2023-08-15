@@ -1,0 +1,99 @@
+{
+  "run": [
+    {
+      "method": "shell.run",
+      "params": {
+        "message": "git clone https://huggingface.co/spaces/Intel/ldm3d"
+      }
+    },
+    {
+      "method": "shell.run",
+      "params": {
+        "path": "ldm3d",
+        "message": "{{os.platform() === 'win32' ? 'python' : 'python3'}} -m venv env"
+      }
+    },
+    {
+      "method": "shell.start",
+      "params": {
+        "path": "ldm3d",
+        "env": {
+          "HF_HOME": "../huggingface"
+        }
+      }
+    },
+    {
+      "method": "shell.enter",
+      "params": {
+        "message": "{{os.platform() === 'win32' ? 'env\\\\Scripts\\\\activate env' : 'source env/bin/activate env'}}",
+        "on": [
+          {
+            "event": null,
+            "return": true
+          }
+        ]
+      }
+    },
+    {
+      "method": "shell.enter",
+      "params": {
+        "message": "npx --yes torchcraft",
+        "on": [
+          {
+            "event": null,
+            "return": true
+          }
+        ]
+      }
+    },
+    {
+      "method": "shell.enter",
+      "params": {
+        "message": "pip install -r torchcraft.txt",
+        "on": [
+          {
+            "event": null,
+            "return": true
+          }
+        ]
+      }
+    },
+    {
+      "method": "shell.enter",
+      "params": {
+        "message": "pip install -r {{os.platform() === 'win32' ? '.\\\\requirements.txt' : './requirements.txt'}}",
+        "on": [
+          {
+            "event": null,
+            "return": true
+          }
+        ]
+      }
+    },
+    {
+      "method": "shell.enter",
+      "params": {
+        "message": "pip install gradio==3.40.0 huggingface_hub",
+        "on": [
+          {
+            "event": null,
+            "return": true
+          }
+        ]
+      }
+    },
+    {
+      "method": "input",
+      "params": {
+        "title": "Install Success",
+        "description": "Go back to the dashboard and launch the app!"
+      }
+    },
+    {
+      "method": "browser.open",
+      "params": {
+        "uri": "/?selected=LDM 3D"
+      }
+    }
+  ]
+}
