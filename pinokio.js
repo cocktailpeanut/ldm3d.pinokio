@@ -6,7 +6,7 @@ const exists = (filepath) => {
 }
 module.exports = {
   title: "LDM 3D",
-  description: "One click installer for Intel's ldm3d",
+  description: "[NVIDIA GPU ONLY] One click installer for Intel's ldm3d",
   icon: "icon.png",
   menu: async (kernel) => {
     let installed = await exists(path.resolve(__dirname, "ldm3d", "env"))
